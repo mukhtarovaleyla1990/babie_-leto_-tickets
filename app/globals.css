@@ -1,0 +1,158 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Палитра «бабьего лета»: тёплый свет, охра, ягода, зелень острова. */
+:root {
+  --c-bg: #fbf5ea;
+  --c-surface: #ffffff;
+  --c-surface-2: #f5ece0;
+  --c-border: #e6d8c3;
+  --c-ink: #2c2118;
+  --c-muted: #7d6b58;
+
+  --c-accent: #e0632c;
+  --c-accent-ink: #fff8f2;
+  --c-berry: #b6295a;
+  --c-leaf: #3f7d4e;
+  --c-sky: #2f6f93;
+
+  --r-card: 22px;
+
+  --font-display: "Georgia", "Times New Roman", serif;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  border-color: var(--c-border);
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--c-bg);
+  color: var(--c-ink);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Тёплое солнечное свечение под hero */
+.hero-glow {
+  background:
+    radial-gradient(60% 70% at 15% 10%, rgba(224, 99, 44, 0.22), transparent 70%),
+    radial-gradient(50% 60% at 85% 0%, rgba(182, 41, 90, 0.16), transparent 70%),
+    radial-gradient(70% 80% at 60% 100%, rgba(63, 125, 78, 0.14), transparent 70%);
+}
+
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--r-card);
+}
+
+/* Выбранное состояние карточки — заметное, но не кричащее */
+.card-selected {
+  border-color: var(--c-accent);
+  box-shadow:
+    0 0 0 2px var(--c-accent),
+    0 10px 30px -12px rgba(224, 99, 44, 0.45);
+}
+
+.field {
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid var(--c-border);
+  background: var(--c-surface);
+  padding: 0.75rem 0.9rem;
+  font-size: 16px; /* не даём iOS зумить при фокусе */
+  color: var(--c-ink);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field::placeholder {
+  color: #a4907a;
+}
+
+.field:focus {
+  outline: none;
+  border-color: var(--c-accent);
+  box-shadow: 0 0 0 3px rgba(224, 99, 44, 0.18);
+}
+
+.btn-primary {
+  background: var(--c-accent);
+  color: var(--c-accent-ink);
+  border-radius: 999px;
+  font-weight: 600;
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+}
+
+.btn-primary:hover:not(:disabled) {
+  filter: brightness(1.06);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn-primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Плавное появление секций */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.rise {
+  animation: rise 0.5s ease both;
+}
+
+@keyframes drift {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(6deg);
+  }
+}
+
+.drift {
+  animation: drift 7s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Скрываем стрелки у number-инпутов — возраст вводим руками */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
