@@ -84,8 +84,8 @@ export const ACTIVITIES: Activity[] = [
     requiresSwimmingInfo: false,
   },
   {
-    id: "sport-training",
-    name: "Спортивная тренировка",
+    id: "yoga",
+    name: "Йога",
     time: "09:45 – 11:00",
     description: "Йога с аидой Чиналиевой. Поющие чаши",
     capacity: 20,
