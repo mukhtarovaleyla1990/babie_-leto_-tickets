@@ -41,7 +41,7 @@ export const ACTIVITIES: Activity[] = [
   {
     id: "football",
     name: "Футбол",
-    time: "11:30 – 13:00",
+    time: "11:00 – 12:00",
     description: "Тренировка по футболу с Антоном в Margitszigeti Atlétikai Centrum .",
     capacity: 12,
     remainingPlaces: 12,
