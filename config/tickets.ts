@@ -27,7 +27,7 @@ export const TICKET_TYPES: TicketType[] = [
     name: "Взрослый · одна активность утреннего лайн апа",
     audience: "adult",
     scope: "single",
-    price: 300,
+    price: 7000,
     participants: 1,
     description: "Вход на фестиваль и участие в одной выбранной утренней активности и свободное посещение опен эйр активностей в Holdudvar  .",
     isActive: true,
