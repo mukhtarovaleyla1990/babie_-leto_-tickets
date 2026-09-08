@@ -8,6 +8,7 @@ import {
   getActivity,
   type Activity,
 } from "@/config/activities";
+import { CONTENT } from "@/config/content";
 import { ACTIVE_TICKET_TYPES, MAX_QUANTITY, getTicketType } from "@/config/tickets";
 import {
   emptyParticipant,
@@ -198,14 +199,14 @@ export function BookingForm() {
       const data = (await response.json()) as { url?: string; error?: string };
 
       if (!response.ok || !data.url) {
-        setError(data.error ?? "Не удалось создать оплату. Попробуйте ещё раз.");
+        setError(data.error ?? CONTENT.errors.checkoutFailed);
         setSubmitting(false);
         return;
       }
 
       window.location.href = data.url;
     } catch {
-      setError("Сеть недоступна. Проверьте соединение и попробуйте снова.");
+      setError(CONTENT.errors.network);
       setSubmitting(false);
     }
   }
@@ -223,6 +224,11 @@ export function BookingForm() {
     onSubmit: submit,
   };
 
+  const steps = CONTENT.steps;
+  const form = CONTENT.form;
+  const activityStep =
+    ticket?.scope === "single" ? steps.activitiesSingle : steps.activitiesAllday;
+
   return (
     <>
       <div
@@ -233,8 +239,8 @@ export function BookingForm() {
           {/* 1 — Билет */}
           <Section
             step={1}
-            title="Выберите билет"
-            subtitle="Цена указана за один билет. Парный билет — это вход для двух участников."
+            title={steps.tickets.title}
+            subtitle={steps.tickets.subtitle}
           >
             <div className="grid gap-4 sm:grid-cols-2">
               {ACTIVE_TICKET_TYPES.map((t) => (
@@ -252,16 +258,8 @@ export function BookingForm() {
           {ticket && (
             <Section
               step={2}
-              title={
-                ticket.scope === "single"
-                  ? "Выберите активность"
-                  : "Отметьте активности"
-              }
-              subtitle={
-                ticket.scope === "single"
-                  ? "Для этого билета нужно выбрать ровно одну активность."
-                  : "Билет на весь день даёт доступ ко всей программе. Отметьте активности с ограниченными местами, чтобы мы оставили место для вас."
-              }
+              title={activityStep.title}
+              subtitle={activityStep.subtitle}
             >
               <div className="grid gap-4 sm:grid-cols-2">
                 {availableActivities.map((activity) => (
@@ -274,9 +272,7 @@ export function BookingForm() {
                 ))}
               </div>
               {availableActivities.length === 0 && (
-                <p className="text-sm text-muted">
-                  Для этого типа билета пока нет доступных активностей.
-                </p>
+                <p className="text-sm text-muted">{steps.noActivities}</p>
               )}
             </Section>
           )}
@@ -285,16 +281,16 @@ export function BookingForm() {
           {ticket && (
             <Section
               step={3}
-              title="Ваши данные"
-              subtitle="Чек и подтверждение оплаты придут на этот email."
+              title={steps.details.title}
+              subtitle={steps.details.subtitle}
             >
               <div className="card space-y-4 p-5 sm:p-6">
                 <TextField
-                  label="Имя и фамилия"
+                  label={form.buyerName.label}
                   required
                   value={draft.buyer.name}
                   autoComplete="name"
-                  placeholder="Анна Ковач"
+                  placeholder={form.buyerName.placeholder}
                   onChange={(name) =>
                     setDraft((prev) => ({
                       ...prev,
@@ -304,12 +300,12 @@ export function BookingForm() {
                 />
                 <div className="grid gap-4 sm:grid-cols-2">
                   <TextField
-                    label="Email"
+                    label={form.buyerEmail.label}
                     type="email"
                     inputMode="email"
                     autoComplete="email"
                     required
-                    placeholder="anna@example.com"
+                    placeholder={form.buyerEmail.placeholder}
                     value={draft.buyer.email}
                     onChange={(email) =>
                       setDraft((prev) => ({
@@ -319,12 +315,12 @@ export function BookingForm() {
                     }
                   />
                   <TextField
-                    label="Телефон"
+                    label={form.buyerPhone.label}
                     type="tel"
                     inputMode="tel"
                     autoComplete="tel"
                     required
-                    placeholder="+36 30 123 4567"
+                    placeholder={form.buyerPhone.placeholder}
                     value={draft.buyer.phone}
                     onChange={(phone) =>
                       setDraft((prev) => ({
@@ -343,20 +339,21 @@ export function BookingForm() {
                     const participant =
                       draft.participants[index] ?? emptyParticipant();
                     const isChild = ticket.audience === "child";
+                    const nameField = isChild ? form.childName : form.participantName;
 
                     return (
                       <div key={index} className="card space-y-4 p-5 sm:p-6">
                         <h3 className="font-display text-lg text-ink">
-                          {isChild ? "Ребёнок" : "Участник"}
+                          {isChild ? form.childHeading : form.participantHeading}
                           {people > 1 ? ` ${index + 1}` : ""}
                         </h3>
 
                         {showNames && (
                           <TextField
-                            label={isChild ? "Имя ребёнка" : "Имя и фамилия"}
+                            label={nameField.label}
                             required
                             value={participant.name}
-                            placeholder={isChild ? "Марк" : "Пётр Ковач"}
+                            placeholder={nameField.placeholder}
                             onChange={(value) =>
                               updateParticipant(index, "name", value)
                             }
@@ -365,11 +362,11 @@ export function BookingForm() {
 
                         {(isChild || swimming) && (
                           <TextField
-                            label="Возраст"
+                            label={form.age.label}
                             type="number"
                             inputMode="numeric"
                             required
-                            placeholder="10"
+                            placeholder={form.age.placeholder}
                             value={participant.age}
                             onChange={(value) =>
                               updateParticipant(index, "age", value)
@@ -380,19 +377,20 @@ export function BookingForm() {
                         {swimming && (
                           <>
                             <SelectField
-                              label="Уровень плавания"
+                              label={form.swimmingLevel.label}
                               required
                               value={participant.swimmingLevel}
                               options={SWIMMING_LEVELS}
+                              placeholder={form.selectPlaceholder}
                               onChange={(value) =>
                                 updateParticipant(index, "swimmingLevel", value)
                               }
                             />
                             <TextAreaField
-                              label="Медицинские ограничения"
+                              label={form.swimmingNotes.label}
                               required
-                              hint="О чём должен знать тренер. Если ограничений нет — напишите «нет»."
-                              placeholder="Нет"
+                              hint={form.swimmingNotes.hint}
+                              placeholder={form.swimmingNotes.placeholder}
                               value={participant.swimmingNotes}
                               onChange={(value) =>
                                 updateParticipant(index, "swimmingNotes", value)
@@ -410,13 +408,13 @@ export function BookingForm() {
               {showGuardian && (
                 <div className="card mt-4 space-y-4 p-5 sm:p-6">
                   <h3 className="font-display text-lg text-ink">
-                    Родитель или сопровождающий
+                    {form.guardianHeading}
                   </h3>
                   <div className="grid gap-4 sm:grid-cols-2">
                     <TextField
-                      label="Имя и фамилия"
+                      label={form.guardianName.label}
                       required
-                      placeholder="Анна Ковач"
+                      placeholder={form.guardianName.placeholder}
                       value={draft.guardian.name}
                       onChange={(name) =>
                         setDraft((prev) => ({
@@ -426,10 +424,10 @@ export function BookingForm() {
                       }
                     />
                     <TextField
-                      label="Контакты"
+                      label={form.guardianContact.label}
                       required
-                      placeholder="+36 30 123 4567"
-                      hint="Телефон или email на день фестиваля."
+                      placeholder={form.guardianContact.placeholder}
+                      hint={form.guardianContact.hint}
                       value={draft.guardian.contact}
                       onChange={(contact) =>
                         setDraft((prev) => ({
@@ -467,7 +465,7 @@ export function BookingForm() {
         canPay={validation.ok}
         submitting={submitting}
         onSubmit={submit}
-        ticketName={ticket ? ticket.name : "Билет не выбран"}
+        ticketName={ticket ? ticket.name : CONTENT.summary.mobileNoTicket}
       />
     </>
   );

@@ -1,18 +1,8 @@
 "use client";
 
+import { CONTENT, fill } from "@/config/content";
 import { formatPrice } from "@/config/festival";
 import type { TicketType } from "@/config/tickets";
-
-const AUDIENCE_LABEL: Record<TicketType["audience"], string> = {
-  adult: "Взрослый",
-  child: "Детский",
-  student: "Студенческий",
-};
-
-const SCOPE_LABEL: Record<TicketType["scope"], string> = {
-  single: "Одна активность",
-  allday: "Весь день",
-};
 
 export function TicketCard({
   ticket,
@@ -23,6 +13,8 @@ export function TicketCard({
   selected: boolean;
   onSelect: () => void;
 }) {
+  const t = CONTENT.ticketCard;
+
   return (
     <button
       type="button"
@@ -34,7 +26,7 @@ export function TicketCard({
     >
       <div className="flex flex-wrap items-center gap-2">
         <span className="rounded-full bg-surface-2 px-2.5 py-1 text-xs font-semibold uppercase tracking-wide text-muted">
-          {AUDIENCE_LABEL[ticket.audience]}
+          {t.audience[ticket.audience]}
         </span>
         <span
           className={`rounded-full px-2.5 py-1 text-xs font-semibold ${
@@ -43,11 +35,11 @@ export function TicketCard({
               : "bg-[var(--c-sky)]/12 text-sky"
           }`}
         >
-          {SCOPE_LABEL[ticket.scope]}
+          {t.scope[ticket.scope]}
         </span>
         {ticket.participants > 1 && (
           <span className="rounded-full bg-[var(--c-berry)]/12 px-2.5 py-1 text-xs font-semibold text-berry">
-            на {ticket.participants} человек
+            {fill(t.participants, { n: ticket.participants })}
           </span>
         )}
       </div>

@@ -1,29 +1,41 @@
 "use client";
 
 import type { Activity } from "@/config/activities";
+import { CONTENT, fill } from "@/config/content";
 
 function placesLabel(activity: Activity): { text: string; tone: string } {
+  const t = CONTENT.activityCard;
+
   if (activity.remainingPlaces <= 0) {
-    return { text: "Мест нет", tone: "bg-surface-2 text-muted" };
+    return { text: t.soldOut, tone: "bg-surface-2 text-muted" };
   }
-  if (activity.remainingPlaces <= 5) {
+  if (activity.remainingPlaces <= t.fewPlacesThreshold) {
     return {
-      text: `Осталось ${activity.remainingPlaces}`,
+      text: fill(t.fewPlaces, { n: activity.remainingPlaces }),
       tone: "bg-[var(--c-berry)]/12 text-berry",
     };
   }
   return {
-    text: `Свободно ${activity.remainingPlaces}`,
+    text: fill(t.manyPlaces, { n: activity.remainingPlaces }),
     tone: "bg-[var(--c-leaf)]/12 text-leaf",
   };
 }
 
 function ageLabel(activity: Activity): string | null {
+  const t = CONTENT.activityCard;
+
   if (activity.minimumAge !== null && activity.maximumAge !== null) {
-    return `${activity.minimumAge}–${activity.maximumAge} лет`;
+    return fill(t.ageRange, {
+      min: activity.minimumAge,
+      max: activity.maximumAge,
+    });
   }
-  if (activity.minimumAge !== null) return `от ${activity.minimumAge} лет`;
-  if (activity.maximumAge !== null) return `до ${activity.maximumAge} лет`;
+  if (activity.minimumAge !== null) {
+    return fill(t.ageMin, { n: activity.minimumAge });
+  }
+  if (activity.maximumAge !== null) {
+    return fill(t.ageMax, { n: activity.maximumAge });
+  }
   return null;
 }
 
@@ -86,7 +98,7 @@ export function ActivityCard({
         )}
         {activity.requiresSwimmingInfo && (
           <span className="rounded-full bg-[var(--c-sky)]/12 px-2.5 py-1 text-sky">
-            нужна анкета пловца
+            {CONTENT.activityCard.swimmingBadge}
           </span>
         )}
       </div>
