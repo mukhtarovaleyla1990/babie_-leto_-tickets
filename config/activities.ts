@@ -23,22 +23,39 @@ export type Activity = {
 };
 
 export const ACTIVITIES: Activity[] = [
-  
+ 
   {
     id: "Business Breakfast",
     name: "Бизнес-завтрак Жизнь в эмиграции",
     time: "09:00 – 11:00",
-    description: "Деловая встреча с Александром Квочкиным, Даной, Ириной Хамовой, Еленой Холодовой, Артуром Арустамяном. Завтрак не входит в стоимость",
+    description: "Деловая встреча с Александром Квочкиным, Даной, Ириной Хамовой, Еленой Холодовой, Артуром Арустамяном. Завтрак не входит в стоимость.",
     capacity: 50,
     remainingPlaces: 50,
     isActive: true,
     adultAllowed: true,
     childAllowed: true,
     studentAllowed: true,
-    minimumAge: 18,
+    minimumAge: 10,
     maximumAge: null,
-    requiresSwimmingInfo: true,
+    requiresSwimmingInfo: false,
   },
+  {
+    id: "book club",
+    name: "Книжный клуб",
+    time: "11:20 – 12:00",
+    description: "Книжный клуб Vdohnovengria.Мини-квиз. Розыгрыш подарков",
+    capacity: 50,
+    remainingPlaces: 50,
+    isActive: true,
+    adultAllowed: true,
+    childAllowed: true,
+    studentAllowed: true,
+    minimumAge: 10,
+    maximumAge: null,
+    requiresSwimmingInfo: false,
+  },
+  
+  
   {
     id: "pool-training.kids",
     name: "Тренировка по плаванью для детей от 5 лет",
