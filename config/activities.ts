@@ -158,6 +158,8 @@ export const ACTIVITIES: Activity[] = [
     maximumAge: null,
     requiresSwimmingInfo: false,
   },
+  {
+  
     id: "other",
     name: "Другая активность",
     time: "в течение дня",
