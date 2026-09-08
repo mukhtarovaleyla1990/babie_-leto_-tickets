@@ -299,6 +299,22 @@ export const ACTIVITIES: Activity[] = [
     maximumAge: null,
     requiresSwimmingInfo: false,
   },
+   {
+    id: "chess",
+    name: "Мастер класс по шахматам ",
+    time: "18:00– 19:00",
+    description: "Мастер класс и игра в шахматы с Алексеем Бравиным в в Holdudvar.",
+    capacity: 30,
+    remainingPlaces: 30,
+    isActive: true,
+    adultAllowed: true,
+    childAllowed: true,
+    studentAllowed: true,
+    minimumAge: 7,
+    maximumAge: null,
+    requiresSwimmingInfo: false,
+ 
+  {
   {
     id: "other",
     name: "Другая активность",
