@@ -283,7 +283,7 @@ export const ACTIVITIES: Activity[] = [
     minimumAge: 12,
     maximumAge: null,
     requiresSwimmingInfo: false,
- 
+  },
   {
     id: "quiz",
     name: "Квиз",
