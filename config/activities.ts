@@ -159,7 +159,6 @@ export const ACTIVITIES: Activity[] = [
     requiresSwimmingInfo: false,
   },
   {
-  {
     id: "quiz",
     name: "Квиз",
     time: "19:30 – 21:30",
@@ -174,12 +173,11 @@ export const ACTIVITIES: Activity[] = [
     maximumAge: null,
     requiresSwimmingInfo: false,
   },
-  {
     id: "other",
     name: "Другая активность",
     time: "в течение дня",
-    description: "Свободное участие в программе фестиваля: сцена, ярмарка, зоны отдыха.",
-    capacity: 100,
+    description: "Свободное участие в программе фестиваля: мастер-классы, опен айр танцы, присоедениться к любой тренеровке в Holdudvar, зоны отдыха.",
+    capacity: 200,
     remainingPlaces: 84,
     isActive: true,
     adultAllowed: true,
