@@ -53,13 +53,13 @@ export const TICKET_TYPES: TicketType[] = [
     isActive: true,
   },
   {
-    id: "child-single",
-    name: "Детский · одна активность",
+    id: "child-single morning",
+    name: "Детский · одна активность утреннего лайн апа",
     audience: "child",
     scope: "single",
     price: 3500,
     participants: 1,
-    description: "Для детей. Вход и одна выбранная активность.",
+    description: "Для детей. Вход и одна выбранная активность утреннего лайн апа и свободное посещение активносте в Holdudvar.",
     isActive: true,
   },
   {
