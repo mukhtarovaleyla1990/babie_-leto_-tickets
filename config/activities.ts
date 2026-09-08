@@ -272,7 +272,7 @@ export const ACTIVITIES: Activity[] = [
     time: "в течение дня",
     description: "Свободное участие в программе фестиваля: все дневные и вечерние мастер-классы , опен айр танцы, присоедениться к любой тренеровке в Holdudvar, зоны отдыха.",
     capacity: 200,
-    remainingPlaces: 84,
+    remainingPlaces: 200,
     isActive: true,
     adultAllowed: true,
     childAllowed: true,
