@@ -23,18 +23,19 @@ export type Activity = {
 };
 
 export const ACTIVITIES: Activity[] = [
+  
   {
-    id: "pool-training",
-    name: "Тренировка по плаванью для взрослых",
-    time: "11:30 – 13:30",
-    description: "Занятие с Ольгой Андреевой в бассейне: мастер класс по технике плавания,или вводный урок: адаптация к воде. В стоимость входит аренда дорожки и мастер класс. Необходимо приобрести входной билет в комплекс",
-    capacity: 12,
-    remainingPlaces: 12,
+    id: "Business Breakfast",
+    name: "Бизнес-завтрак Жизнь в эмиграции",
+    time: "09:00 – 11:00",
+    description: "Деловая встреча с Александром Квочкиным, Даной, Ириной Хамовой, Еленой Холодовой, Артуром Арустамяном. Завтрак не входит в стоимость",
+    capacity: 50,
+    remainingPlaces: 50,
     isActive: true,
     adultAllowed: true,
     childAllowed: true,
     studentAllowed: true,
-    minimumAge: 5,
+    minimumAge: 18,
     maximumAge: null,
     requiresSwimmingInfo: true,
   },
