@@ -267,8 +267,21 @@ export const ACTIVITIES: Activity[] = [
     maximumAge: null,
     requiresSwimmingInfo: false,
   },
-  
-  
+  {
+    id: "painting",
+    name: "Мастерская Golden Duck. Творческий клуб Besedka.",
+    time: "17:00– 18:00",
+    description: "Мастер-класс по росписи открыток акрилом на темно и светлом фоне. Для детей и взрослых.",
+    capacity: 30,
+    remainingPlaces: 30,
+    isActive: true,
+    adultAllowed: true,
+    childAllowed: true,
+    studentAllowed: true,
+    minimumAge: 7,
+    maximumAge: null,
+    requiresSwimmingInfo: false,
+  },
   {
     id: "kung fu",
     name: "3 Мастер-класса по кунг-фу для детей и взрослых ",
