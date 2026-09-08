@@ -237,6 +237,24 @@ export const ACTIVITIES: Activity[] = [
     requiresSwimmingInfo: false,
   },
   {
+    id: "zumba",
+    name: "Танцевальная фитнес тренеровка.",
+    time: "16:00– 16:40",
+    description: "Zumba c Алиной Толстиковой.",
+    capacity: 30,
+    remainingPlaces: 30,
+    isActive: true,
+    adultAllowed: true,
+    childAllowed: true,
+    studentAllowed: true,
+    minimumAge: 12,
+    maximumAge: null,
+    requiresSwimmingInfo: false,
+  },
+  
+  
+  
+  {
     id: "kung fu",
     name: "3 Мастер-класса по кунг-фу для детей и взрослых ",
     time: "17:00– 18:00",
