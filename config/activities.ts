@@ -314,10 +314,10 @@ export const ACTIVITIES: Activity[] = [
     maximumAge: null,
     requiresSwimmingInfo: false,
  
-  {
+  },
   {
     id: "other",
-    name: "Другая активность",
+    name: "Разные активности",
     time: "в течение дня",
     description: "Свободное участие в программе фестиваля в Holdudvar: все дневные и вечерние мастер-классы , опен эйр тренировки и танцы, возможность присоедениться к любой активности в Holdudvar в свободном режиме, зоны отдыха.",
     capacity: 200,
