@@ -120,7 +120,7 @@ export const ACTIVITIES: Activity[] = [
     id: "padel",
     name: "Падел",
     time: "12:00 – 13:00",
-    description: "Ракетки и мячи предоставляем. Короткий вводный урок для новичков.",
+    description: " Вводный урок для новичков от Ярослава Лазара в Margitszigeti Atlétikai Centrum.",
     capacity: 6,
     remainingPlaces: 6,
     isActive: true,
