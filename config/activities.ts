@@ -106,7 +106,6 @@ export const ACTIVITIES: Activity[] = [
     name: "Волейбол",
     time: "12:00 – 13:00",
     description: "Тренировка по волейболу с Алексеем Дениным в Margitszigeti Atlétikai Centrum.В комлексе есть душ .",
-    capacity: 12,.",
     capacity: 12,
     remainingPlaces: 12,
     isActive: true,
