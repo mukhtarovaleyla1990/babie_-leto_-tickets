@@ -2,7 +2,7 @@
 export const FESTIVAL = {
   name: "BABIE LETO FEST",
   year: "2026",
-  dateLabel: "12 сентября 2026",
+  dateLabel: "20 сентября 2026",
   venue: "Holdudvar, Margitsziget",
   city: "Budapest",
   currency: "huf",
