@@ -28,7 +28,7 @@ export const ACTIVITIES: Activity[] = [
     id: "yoga",
     name: "Йога",
     time: "10:00 – 11:00",
-    description: "Йога с Аидой Чиналиевой. Поющие чаши. С собой иметь коврики",
+    description: "Йога с Аидой Чиналиевой. Шавасана с поющими чашами с Борисом Водоковым. С собой иметь коврики",
     capacity: 20,
     remainingPlaces: 20,
     isActive: true,
