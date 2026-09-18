@@ -108,6 +108,29 @@ export async function POST(request: Request) {
     const stripe = getStripe();
     const base = siteUrl();
 
+    // Состав заказа. Своей БД нет — это единственная запись о покупке.
+    // Кладём и в сессию, и в платёж: Stripe не копирует metadata сессии
+    // в PaymentIntent, а в дашборде (Payments) виден именно платёж.
+    const orderMetadata = {
+      ticket_type: meta(ticket.name),
+      ticket_type_id: meta(ticket.id),
+      quantity: String(draft.quantity),
+      participants_count: String(people),
+      total_huf: String(orderTotal(ticket, draft.quantity)),
+      activities: meta(activityNames || "—"),
+      buyer_name: meta(draft.buyer.name.trim()),
+      buyer_phone: meta(draft.buyer.phone.trim()),
+      participants: meta(participantLines),
+      swimming_notes: meta(swimmingNotes || "—"),
+      guardian: needsGuardian(ticket)
+        ? meta(`${draft.guardian.name.trim()} — ${draft.guardian.contact.trim()}`)
+        : "—",
+    };
+
+    const orderDescription = meta(
+      `${ticket.name} × ${draft.quantity} — ${activityNames || "без активностей"} — ${draft.buyer.name.trim()}`
+    );
+
     const session = await stripe.checkout.sessions.create({
       mode: "payment",
       // Stripe сам отправит покупателю чек на этот адрес.
@@ -130,21 +153,10 @@ export async function POST(request: Request) {
       ],
       success_url: `${base}/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${base}/cancel`,
-      // Единственное место, где хранится состав заказа: своей БД у нас нет.
-      metadata: {
-        ticket_type: meta(ticket.name),
-        ticket_type_id: meta(ticket.id),
-        quantity: String(draft.quantity),
-        participants_count: String(people),
-        total_huf: String(orderTotal(ticket, draft.quantity)),
-        activities: meta(activityNames || "—"),
-        buyer_name: meta(draft.buyer.name.trim()),
-        buyer_phone: meta(draft.buyer.phone.trim()),
-        participants: meta(participantLines),
-        swimming_notes: meta(swimmingNotes || "—"),
-        guardian: needsGuardian(ticket)
-          ? meta(`${draft.guardian.name.trim()} — ${draft.guardian.contact.trim()}`)
-          : "—",
+      metadata: orderMetadata,
+      payment_intent_data: {
+        description: orderDescription,
+        metadata: orderMetadata,
       },
     });
 
