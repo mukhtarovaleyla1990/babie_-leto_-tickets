@@ -109,7 +109,7 @@ export const TICKET_TYPES: TicketType[] = [
     name: "Студенческий · весь день",
     audience: "student",
     scope: "allday",
-    price: 9000,
+    price: 100,
     participants: 1,
     description: "Для студентов. Полный день и вся программа фестиваля.",
     notice: "При входе необходимо предъявить действующий студенческий билет.",
