@@ -24,7 +24,7 @@ export type TicketType = {
 export const TICKET_TYPES: TicketType[] = [
   {
     id: "adult-single morning",
-    name: "Взрослый · одна активность утреннего лайн апа",
+    name: "Взрослый (от 12 лет) · одна активность утреннего лайн апа",
     audience: "adult",
     scope: "single",
     price: 6000,
@@ -34,7 +34,7 @@ export const TICKET_TYPES: TicketType[] = [
   },
   {
     id: "adult-single day",
-    name: "Взрослый · одна активность дневного лайн апа",
+    name: "Взрослый (от 12 лет) · одна активность дневного лайн апа",
     audience: "adult",
     scope: "single",
     price: 6000,
@@ -44,7 +44,7 @@ export const TICKET_TYPES: TicketType[] = [
   },
   {
     id: "adult-allday",
-    name: "Взрослый · весь день",
+    name: "Взрослый (от 12 лет) · весь день",
     audience: "adult",
     scope: "allday",
     price: 10000,
@@ -54,17 +54,17 @@ export const TICKET_TYPES: TicketType[] = [
   },
   {
     id: "child-single morning",
-    name: "Детский · одна активность утреннего лайн апа",
+    name: "Детский (до 11 лет) · одна активность утреннего лайн апа",
     audience: "child",
     scope: "single",
     price: 2500,
     participants: 1,
-    description: "Для детей. Вход и одна выбранная активность утреннего лайн апа и свободное посещение активносте в Holdudvar.",
+    description: "Для детей (до 11 лет). Вход и одна выбранная активность утреннего лайн апа и свободное посещение активносте в Holdudvar.",
     isActive: true,
   },
   {
     id: "child-single day",
-    name: "Детский · одна активность дневного лайн апа",
+    name: "Детский (до 11 лет) · одна активность дневного лайн апа",
     audience: "child",
     scope: "single",
     price: 2500,
@@ -74,7 +74,7 @@ export const TICKET_TYPES: TicketType[] = [
   },
   {
     id: "child-allday",
-    name: "Детский · весь день",
+    name: "Детский (до 11 лет) · весь день",
     audience: "child",
     scope: "allday",
     price: 4000,
