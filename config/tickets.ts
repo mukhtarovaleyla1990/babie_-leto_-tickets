@@ -117,7 +117,7 @@ export const TICKET_TYPES: TicketType[] = [
   },
   {
     id: "couple-allday",
-    name: "Парный · весь день",
+    name: "Парный (от 12 лет) · весь день",
     audience: "adult",
     scope: "allday",
     price: 15000,
