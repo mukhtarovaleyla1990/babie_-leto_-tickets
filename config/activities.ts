@@ -135,7 +135,7 @@ export const ACTIVITIES: Activity[] = [
     time: "12:00 – 13:00",
     description: " Вводный урок для новичков от Ярослава Лазара в Margitszigeti Atlétikai Centrum.В комлексе есть душ. Для получения инвентаря с собой иметь любой документ .",
     capacity: 10,
-    remainingPlaces: 10,
+    remainingPlaces: 2,
     isActive: true,
     adultAllowed: true,
     childAllowed: false,
